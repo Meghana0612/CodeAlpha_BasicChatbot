@@ -1,0 +1,42 @@
+import nltk
+from nltk.chat.util import Chat, reflections
+
+
+pairs = [
+    [r"hi|hello|hey", ["Hello! How can I help you?", "Hi there! What's up?", "Hey! How's your day going?"]],
+    [r"how are you ?", ["I'm just a bot, but I'm doing fine! How about you?", "I'm great! How can I assist you today?"]],
+    [r"(.*) your name ?", ["I'm a chatbot created to chat with you!", "You can call me ChatBot."]],
+    [r"what can you do ?", ["I can chat with you, answer basic questions, and keep you company!"]],
+    [r"(.*) created you ?", ["I was created by a programmer using Python and NLTK!", "A developer who loves AI built me."]],
+    [r"(.*) (location|city) ?", ["I'm just a bot, but I exist in the virtual world!"]],
+    [r"quit|bye|exit", ["Goodbye! Have a great day!", "Bye! It was nice talking to you.", "See you later!"]],
+    [r"(.*)", ["I'm not sure I understand. Can you rephrase that?", "That's interesting! Tell me more."]]
+]
+
+
+chatbot = Chat(pairs, reflections)
+
+def start_chat():
+    print("Hello! I'm your chatbot. Type 'bye' or 'exit' to end the chat.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["bye", "exit", "quit"]:
+            print("ChatBot: Goodbye! Have a great day!")
+            break
+        response = chatbot.respond(user_input)
+        print("ChatBot:", response)
+
+if __name__ == "__main__":
+    start_chat()
+
+output:
+Hello! I'm your chatbot. Type 'bye' or 'exit' to end the chat.
+You: hello
+ChatBot: Hi there! What's up?
+You: what is your name?
+ChatBot: I'm a chatbot created to chat with you!
+You: who created you?
+ChatBot: I was created by a programmer using Python and NLTK!
+You: bye
+ChatBot: Goodbye! Have a great day!
+
